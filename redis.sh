@@ -161,4 +161,4 @@ case "$num" in
 esac
 }
 
-Init
+Install
