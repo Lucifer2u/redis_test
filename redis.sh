@@ -6,18 +6,18 @@ redis_version=6.2.6
 release=`cat /etc/*release /etc/*version 2>/dev/null | grep -Eo '([0-9]{1,2}\.){1,3}' | cut -d '.' -f1 | head -1`;
 
 if [ $(whoami) != "root" ];then
-	echo "请使用root权限执行Redis安装命令！"
+	echo "璇蜂娇鐢╮oot鏉冮檺鎵цRedis瀹夎鍛戒护锛�"
 	exit 1;
 fi
 
 whereis -b yum | grep '/yum' >/dev/null && SysName='CentOS';
-[ "$SysName" == ''  ] && echo '当前操作系统不支持该安装脚本' && exit;
+[ "$SysName" == ''  ] && echo '褰撳墠鎿嶄綔绯荤粺涓嶆敮鎸佽瀹夎鑴氭湰' && exit;
 
 function Install()
 {
 
 if [ -f /usr/local/bin/redis-server ];then
-	echo -e "\033[32mRedis已安装过，请勿重复安装！\033[0m"
+	echo -e "\033[32mRedis宸插畨瑁呰繃锛岃鍕块噸澶嶅畨瑁咃紒\033[0m"
 	exit 1;
 fi
 
@@ -39,9 +39,9 @@ tar zxvf redis-$redis_version.tar.gz
 cd redis-$redis_version
 make && make install
 if test $? != 0; then
-	echo -e "————————————————————————————————————————————————————
-Redis ${redis_version} 安装失败！
-————————————————————————————————————————————————————";
+	echo -e "鈥斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€�
+Redis ${redis_version} 瀹夎澶辫触锛�
+鈥斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€�";
 exit 1
 fi
 
@@ -84,11 +84,11 @@ cd ..
 rm -rf redis-$redis_version redis-$redis_version.tar.gz
 
 echo -e "=================================================================="
-echo -e "\033[32mRedis ${redis_version} 安装成功！\033[0m"
+echo -e "\033[32mRedis ${redis_version} 瀹夎鎴愬姛锛乗033[0m"
 echo -e "=================================================================="
-echo  "连接地址: 127.0.0.1:6379"
-echo  "连接命令: redis-cli -h 127.0.0.1 -p 6379"
-echo  "配置文件: /etc/redis/redis.conf"
+echo  "杩炴帴鍦板潃: 127.0.0.1:6379"
+echo  "杩炴帴鍛戒护: redis-cli -h 127.0.0.1 -p 6379"
+echo  "閰嶇疆鏂囦欢: /etc/redis/redis.conf"
 echo -e "=================================================================="
 
 }
@@ -97,7 +97,7 @@ function Upgrade()
 {
 
 if [ ! -f /usr/local/bin/redis-server ];then
-	echo -e "\033[32mRedis未安装，请先执行安装命令！\033[0m"
+	echo -e "\033[32mRedis鏈畨瑁咃紝璇峰厛鎵ц瀹夎鍛戒护锛乗033[0m"
 	exit 1;
 fi
 
@@ -112,7 +112,7 @@ cd ..
 rm -rf redis-$redis_version redis-$redis_version.tar.gz
 
 echo -e "=================================================================="
-echo -e "\033[32mRedis ${redis_version} 升级成功！\033[0m"
+echo -e "\033[32mRedis ${redis_version} 鍗囩骇鎴愬姛锛乗033[0m"
 echo -e "=================================================================="
 
 }
@@ -136,7 +136,7 @@ rm -rf /home/redis
 rm -rf /etc/redis
 
 echo -e "=================================================================="
-echo -e "\033[32mRedis ${redis_version} 卸载成功！\033[0m"
+echo -e "\033[32mRedis ${redis_version} 鍗歌浇鎴愬姛锛乗033[0m"
 echo -e "=================================================================="
 
 }
@@ -144,14 +144,14 @@ echo -e "=================================================================="
 function Init(){
 clear
 echo -e "==================================================================
-	\033[32mRedis ${redis_version} 安装菜单\033[0m
-	请输入以下数字继续操作
+	\033[32mRedis ${redis_version} 瀹夎鑿滃崟\033[0m
+	璇疯緭鍏ヤ互涓嬫暟瀛楃户缁搷浣�
 ==================================================================
-1. ◎ 安装 Redis ${redis_version}
-2. ◎ 升级 Redis ${redis_version}
-3. ◎ 卸载 Redis
-0. ◎ 退出安装"
-read -p "请输入序号并回车：" num
+1. 鈼� 瀹夎 Redis ${redis_version}
+2. 鈼� 鍗囩骇 Redis ${redis_version}
+3. 鈼� 鍗歌浇 Redis
+0. 鈼� 閫€鍑哄畨瑁�"
+read -p "璇疯緭鍏ュ簭鍙峰苟鍥炶溅锛�" num
 case "$num" in
 [1] ) (Install);;
 [2] ) (Upgrade);;
